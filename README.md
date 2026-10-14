@@ -22,7 +22,7 @@ DB_PORT=3306
 DB_USER=数据库只读账号
 DB_PASSWORD="数据库密码"
 DB_NAME=
-DEEPSEEK_API_KEY=
+API_KEY=
 ```
 
 密码含 `#` 等字符时必须保留双引号；若密码含引号，请按 dotenv 格式选择合适的引号包裹。修改配置后重启服务。数据库名称由服务端固定，改 DB_NAME 不能切换到其他库。
