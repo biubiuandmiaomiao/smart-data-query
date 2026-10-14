@@ -21,7 +21,7 @@ try {
   const {app}=await import('../server/app.js');
   const server=app.listen(port,'127.0.0.1',()=>{
     const url=`http://127.0.0.1:${port}/?view=metrics`;
-    console.log(`\n营销数据字典已启动：${url}\n保持本窗口开启；按 Ctrl+C 停止服务。`);
+    console.log(`\n智能取数已启动：${url}\n保持本窗口开启；按 Ctrl+C 停止服务。`);
     if(!process.env.DB_HOST||!process.env.DB_USER||!process.env.DB_PASSWORD){
       console.log('数据库尚未配置：请编辑 .env，再重启；唯一业务库为 d_root_project_marketing_db。');
     }

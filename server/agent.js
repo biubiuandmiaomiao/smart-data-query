@@ -33,7 +33,7 @@ function buildPrompt(state, today, sources, tables, examples) {
         .map((e, i) => `示例${i + 1} 问题：${e.question}\n示例${i + 1} 输出：${JSON.stringify(e.intent)}`)
         .join('\n')}\n`
     : '';
-  return `你是营销数据字典助手。仅能访问营销库 ${MARKETING_DATABASE}，今天 ${today}，Asia/Shanghai。
+  return `你是智能取数助手。仅能访问营销库 ${MARKETING_DATABASE}，今天 ${today}，Asia/Shanghai。
 核心设计：范围条件决定“统计哪些数据”，数值度量决定“计算什么”；分组决定“按什么看”。三者必须独立。账户、计划等ID即使是bigint也不是度量。
 ${exampleSection}指标字典：${JSON.stringify(state.metrics)}
 真实字段及分类：${JSON.stringify(sources)}
