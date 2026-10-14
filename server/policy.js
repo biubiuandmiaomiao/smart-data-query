@@ -2,8 +2,8 @@ import { businessGuide } from './business-guide.js';
 export const MARKETING_DATABASE = 'd_root_project_marketing_db';
 export function assertMarketingSource(id) {
   const parts = String(id || '').split('.');
-  if (parts.length !== 2 || parts[0] !== MARKETING_DATABASE || !/^[a-zA-Z0-9_]+$/.test(parts[1])) throw new Error('此工作台仅允许访问营销库 d_root_project_marketing_db');
-  if (/(_bak_|_backup_|schema_migration|cursor|quarantine)/i.test(parts[1])) throw new Error('备份或系统控制表不作为营销分析来源');
+  if (parts.length !== 2 || parts[0] !== MARKETING_DATABASE || !/^[a-zA-Z0-9_]+$/.test(parts[1])) throw new Error('此工作台仅允许访问数据库 d_root_project_marketing_db');
+  if (/(_bak_|_backup_|schema_migration|cursor|quarantine)/i.test(parts[1])) throw new Error('备份或系统控制表不作为数据分析来源');
   return parts;
 }
 export const roleNames = { scope: '范围条件', time: '业务时间', measure: '数值度量', derived: '派生比率', snapshot: '时点数值', technical: '技术字段' };

@@ -17,10 +17,10 @@ try{
   fs.writeFileSync(probe,'ok',{flag:'wx'});fs.unlinkSync(probe);report(true,'本地状态目录可写');
   const {getPool,checkDatabase}=await import('../server/db.js');
   const status=await checkDatabase();
-  report(status.connected,status.configured?`营销库连接：${status.connected?'成功':status.error}`:'请填写 DB_HOST、DB_USER、DB_PASSWORD 后重试');
+  report(status.connected,status.configured?`数据库连接：${status.connected?'成功':status.error}`:'请填写 DB_HOST、DB_USER、DB_PASSWORD 后重试');
   if(status.connected){
     const [[row]]=await getPool().execute('SELECT COUNT(*) AS tableCount FROM information_schema.TABLES WHERE TABLE_SCHEMA = ?',['d_root_project_marketing_db']);
-    report(Number(row.tableCount)>0,`营销库可见表/视图数量：${row.tableCount}`);
+    report(Number(row.tableCount)>0,`数据库可见表/视图数量：${row.tableCount}`);
     console.log('连通性检查不等于所有表都具有读取权限；请再从界面试跑一个指标。');
   }
   if(getPool())await getPool().end();

@@ -1,7 +1,7 @@
 import { MARKETING_DATABASE } from './policy.js';
 const ocean = `${MARKETING_DATABASE}.ocean_ad_delivery_daily_detail`;
 const adq = `${MARKETING_DATABASE}.adq_account_daily_databoard`;
-const make = (id,name,source,valueField,unit,description,extra={}) => ({ id,name,source,valueField,unit,description,aliases:[],owner:'营销数据',status:'active',aggregation:'sum',denominatorField:'',multiplier:1,distinctFields:[],timeField:source===ocean?'stat_date':'report_date',dimension:source===ocean?'advertiser_name':'department',scale:1,filters:source===ocean?[{field:'data_topic',operator:'eq',value:'BASIC_DATA'}]:[],notes:source===ocean?'AD竞价种草通日投放明细；按账户、日期、数据主题、报表项目和报表单元唯一。消耗单位为元。':'ADQ账户日快照；一行一账户一天。金额单位为元，时间归因以 report_time_line 为准。',snapshotPolicy:'none',revision:1,updatedAt:new Date().toISOString(),...extra });
+const make = (id,name,source,valueField,unit,description,extra={}) => ({ id,name,source,valueField,unit,description,aliases:[],owner:'数据',status:'active',aggregation:'sum',denominatorField:'',multiplier:1,distinctFields:[],timeField:source===ocean?'stat_date':'report_date',dimension:source===ocean?'advertiser_name':'department',scale:1,filters:source===ocean?[{field:'data_topic',operator:'eq',value:'BASIC_DATA'}]:[],notes:source===ocean?'AD竞价种草通日投放明细；按账户、日期、数据主题、报表项目和报表单元唯一。消耗单位为元。':'ADQ账户日快照；一行一账户一天。金额单位为元，时间归因以 report_time_line 为准。',snapshotPolicy:'none',revision:1,updatedAt:new Date().toISOString(),...extra });
 export function marketingSeeds(){return [
  make('ad_spend','AD投放消耗',ocean,'stat_cost','元','所选日期和投放范围内的广告消耗总额，金额原单位为元。',{aliases:['AD消耗','AD花费','广告费']}),
  make('ad_impressions','AD曝光量',ocean,'show_cnt','次','所选日期和投放范围内的展示次数之和。',{aliases:['展示数','曝光次数']}),

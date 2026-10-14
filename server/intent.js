@@ -43,7 +43,7 @@ export function validateIntent(raw, metrics, sources) {
   }
   if(result.suggestedMetric){
     const source=sources.find(s=>s.id===result.suggestedMetric.source);
-    if(!source)throw new Error('建议指标没有可验证的营销数据来源，请补充表名后重试');
+    if(!source)throw new Error('建议指标没有可验证的数据来源，请补充表名后重试');
     result.suggestedMetric={...result.suggestedMetric,status:'draft'};
   }
   return {...result,modelUsed:true};
