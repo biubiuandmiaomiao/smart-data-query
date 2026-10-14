@@ -21,7 +21,7 @@ DB_HOST=数据库地址
 DB_PORT=3306
 DB_USER=数据库只读账号
 DB_PASSWORD="数据库密码"
-DB_NAME=d_root_project_marketing_db
+DB_NAME=
 DEEPSEEK_API_KEY=
 ```
 
