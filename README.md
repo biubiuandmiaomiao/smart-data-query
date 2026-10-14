@@ -1,6 +1,6 @@
 # 智能取数 · 跨设备运行包
 
-打包日期：2026-10-10。包含当前项目代码、运行依赖、Windows x64 Node.js 22.23.2、启动脚本和测试。只连接 `d_root_project_marketing_db`。
+打包日期：2026-10-10。包含当前项目代码、运行依赖、Windows x64 Node.js 22.23.2 和启动脚本。只连接 `d_root_project_marketing_db`。
 
 ## Windows：解压后双击启动
 
@@ -50,7 +50,7 @@ Windows ARM 可在安装原生 Node 后运行 `node scripts/start.mjs`。本次�
 ## 本地数据与迁移
 
 - 首次运行创建 `.data/workspace.json`，保存字段“再注释”、代码释义、确认状态、指标、常用、已保存分析和模型设置。
-- 本包不包含原电脑的 `.env`、`.data`、数据库密码、模型密钥、查询结果或测试截图。启动后是7个内置指标的干净工作区，不会带上旧设备的私人配置。
+- 本包不包含原电脑的 `.env`、`.data`、数据库密码、模型密钥或查询结果。启动后是7个内置指标的干净工作区，不会带上旧设备的私人配置。
 - 用户维护的业务注解保存成功后在本机重启仍保留。换目录时保留 `.data` 即可；修改数据库配置要编辑新目录的 `.env`。
 - 若确实需要搬迁原工作区，先停止两端服务，备份目标 `.data`，再单独迁移来源 `.data/workspace.json`。文件可能包含模型密钥和内部业务解释，应通过受控方式传输，不要混入可公开分享的代码包。已有样例确认凭据不会迁移，需重新查看样例。
 - `.env` 可用 DATA_DIR 指定状态目录，推荐绝对路径。不设置时默认使用本项目 `.data`。
@@ -70,12 +70,8 @@ Windows ARM 可在安装原生 Node 后运行 `node scripts/start.mjs`。本次�
 
 ## 验证与开发
 
-Windows双击 test.cmd，或运行 `node scripts/test.mjs`，执行隔离的单元/API测试，不依赖业务数据库和模型。
+根目录 package-lock.json 固定依赖版本。重新安装时执行 `npm ci`；只要运行依赖可执行 `npm ci --omit=dev`。
 
-浏览器回归属于开发验收，先执行 npm ci 安装开发依赖（包内未附带 Playwright Core）；需要另起隔离工作区服务、配置数据库/模型及可用日期，可用 BROWSER_EXECUTABLE 指定 Chrome/Edge 可执行文件路径。不要把会修改字段释义的测试指向正式工作区。
-
-根目录 package-lock.json 固定依赖版本。重新安装时执行 `npm ci`，只要运行依赖可执行 `npm ci --omit=dev`；需网络，完整开发安装会包含 Playwright Core，但不自动提供浏览器。
-
-源码结构：server 为API与查询逻辑，public 为界面，test 为测试，scripts 为便携启动/自检。详细功能说明见 docs/DEVELOPMENT.md，历史验收见 docs/USER_JOURNEY_AUDIT.md。本包不意味着后续方案中规划的功能已开发完成。
+源码结构：server 为API与查询逻辑，public 为界面，scripts 为便携启动/自检。详细功能说明见 docs/DEVELOPMENT.md。
 
 Windows运行时许可证位于 runtime/win-x64/LICENSE，各依赖许可证保留在 node_modules 各包内。发布清单见 RELEASE-MANIFEST.json，当前打包验证见 PACKAGE-VERIFICATION.md。

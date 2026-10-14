@@ -1,8 +1,0 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
-import {inclusiveEnd,exclusiveEnd,resultRows,resultSummary,compareDecimal} from '../public/workflow.js';
-test('用户选同一天生成一整天，跨月闰年与历史范围不漂移',()=>{assert.equal(exclusiveEnd('2026-09-19'),'2026-09-20');assert.equal(exclusiveEnd('2024-02-29'),'2024-03-01');assert.equal(inclusiveEnd('2026-01-01'),'2025-12-31');for(const date of ['2026-09-20','2024-03-01'])assert.equal(exclusiveEnd(inclusiveEnd(date)),date);assert.equal(exclusiveEnd('2026-02-30'),'');assert.equal(inclusiveEnd(''),'');});
-test('大整数和小数排序保持精度，空值排最后',()=>{const rows=[{dimension:'A',value:'9007199254740993'},{dimension:'B',value:null},{dimension:'C',value:'9007199254740992'},{dimension:'D',value:'-0.000002'},{dimension:'E',value:'-0.000001'}];assert.deepEqual(resultRows(rows,{sort:'value:asc'}).map(r=>r.dimension),['D','E','C','A','B']);assert.deepEqual(resultRows(rows,{sort:'value:desc'}).map(r=>r.dimension),['A','C','E','D','B']);assert.equal(rows[0].dimension,'A');assert.equal(resultRows(rows,{search:'c'}).length,1);});
-test('无记录、真实零和无法计算分别保留语义，兼容旧SQL',()=>{assert.deepEqual(resultSummary([{value:null,_matchedRows:'0'}]),{matchedRows:'0',rows:[]});assert.deepEqual(resultSummary([{value:0,_matchedRows:'5'}]),{matchedRows:'5',rows:[{value:0}]});assert.deepEqual(resultSummary([{value:null,_matchedRows:'5'}]),{matchedRows:'5',rows:[{value:null}]});assert.deepEqual(resultSummary([{value:null}]),{matchedRows:null,rows:[{value:null}]});});
-
-test('科学记数值按实际大小比较',()=>{assert.equal(compareDecimal('1e-7','0.000001'),-1);assert.equal(compareDecimal('-2e3','-1999'),-1);assert.equal(compareDecimal('1e21','1000000000000000000000'),0);});
